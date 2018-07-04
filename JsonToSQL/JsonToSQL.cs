@@ -35,10 +35,6 @@ namespace JsonToSQL
     {
         public bool ConvertJsonToSQL()
         {
-            
-            
-
-
             string json = File.ReadAllText("E:\\json1.txt");
 
             var objs = JToken.Parse(json);
