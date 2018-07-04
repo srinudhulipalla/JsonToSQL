@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using JsonToSQL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JsonToSQLUnitTest
@@ -9,11 +11,16 @@ namespace JsonToSQLUnitTest
         [TestMethod]
         public void ConvertJsonToSQL()
         {
-            JsonToSQL.JsonToSQL obj = new JsonToSQL.JsonToSQL();
+            JsonConvert obj = new JsonConvert();
+            obj.DatabaseName = "JsonToSQL1";
 
-            bool result = obj.ConvertJsonToSQL();
+            string json = File.ReadAllText("E:\\json1.txt");
 
-            Assert.AreEqual(true, result);
+            string result = obj.ToSQL(json);
+
+            
+
+            Assert.AreEqual(null, null);
         }
     }
 }
