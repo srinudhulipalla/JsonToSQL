@@ -8,6 +8,7 @@
     <Company>DotNET4Techies</Company>
     <Description>Converts the Json data to SQL script format</Description>
     <SignAssembly>false</SignAssembly>
+    <PackageId>JsonToSQLConverter</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
