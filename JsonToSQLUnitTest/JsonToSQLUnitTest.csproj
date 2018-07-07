@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JsonToSQL\JsonToSQL.csproj">
-      <Project>{d165eee5-5292-4ae3-b7df-f23954c4e8ea}</Project>
+      <Project>{0ac7b250-d6fb-46dd-9aa1-f3fb18e71bf9}</Project>
       <Name>JsonToSQL</Name>
     </ProjectReference>
   </ItemGroup>
