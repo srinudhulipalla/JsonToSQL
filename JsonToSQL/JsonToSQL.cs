@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JsonToSQL
 {   
@@ -28,11 +28,11 @@ namespace JsonToSQL
 
             var jToken = JToken.Parse(json);
 
-            if (jToken.Type == JTokenType.Object) //Json in object format
+            if (jToken.Type == JTokenType.Object) //single json object 
             {
-                ParseJObject(jToken.ToObject<JObject>(), "first", string.Empty, 1, 1);
+                ParseJObject(jToken.ToObject<JObject>(), this.DatabaseName, string.Empty, 1, 1);
             }
-            else //Json in array format
+            else //multiple json objects in array 
             {
                 var counter = 1;
                 
@@ -70,10 +70,9 @@ namespace JsonToSQL
         }
 
 
-        private void ParseJObject(JObject obj, string tableName, string parentTableName, int pkValue, int fkValue)
+        private void ParseJObject(JObject jObject, string tableName, string parentTableName, int pkValue, int fkValue)
         {
-
-            if (obj.Count > 0)
+            if (jObject.Count > 0)
             {
                 DataTable dt = new DataTable(tableName);
 
@@ -91,7 +90,7 @@ namespace JsonToSQL
                     dic[parentTableName + "ID"] = fkValue.ToString(); //foreign key
                 }
                 
-                foreach (JProperty property in obj.Properties())
+                foreach (JProperty property in jObject.Properties())
                 {
                     string key = property.Name;
                     JToken jToken = property.Value;
