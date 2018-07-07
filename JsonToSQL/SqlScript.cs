@@ -10,14 +10,13 @@ namespace JsonToSQL
     {
         public static string GenerateDbSchema(DataSet ds, List<TableRelation> relations)
         {
-
-            string dbName = "JsonToSQL";
+                        
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendFormat("CREATE DATABASE {0}", dbName);
+            sb.AppendFormat("CREATE DATABASE {0}", ds.DataSetName);
             sb.AppendLine(string.Empty);
             sb.AppendLine("GO" + Environment.NewLine);
-            sb.AppendFormat("USE {0}", dbName);
+            sb.AppendFormat("USE {0}", ds.DataSetName);
             sb.AppendLine(string.Empty);
             sb.AppendLine("GO" + Environment.NewLine);
 

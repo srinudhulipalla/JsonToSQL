@@ -19,12 +19,24 @@ namespace JsonToSQL
 
         static int index = 0;
 
+        public string ToSQL(Stream jsonStream)
+        {
+            using (StreamReader sr = new StreamReader(jsonStream))
+            {
+                string json = sr.ReadToEnd();
+
+                return ToSQL(json);
+            }
+        }
+
         public string ToSQL(string json)
         {
             if (string.IsNullOrWhiteSpace(this.DatabaseName))
             {
-                this.DatabaseName = "JsonToSQL";
+                this.DatabaseName = Constants.DefaultDbName;
             }
+
+            ds.DataSetName = this.DatabaseName;
 
             var jToken = JToken.Parse(json);
 

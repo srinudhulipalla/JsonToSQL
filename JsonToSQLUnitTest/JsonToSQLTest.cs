@@ -9,18 +9,39 @@ namespace JsonToSQLUnitTest
     public class JsonToSQLTest
     {
         [TestMethod]
-        public void ConvertJsonToSQL()
+        public void ConvertJsonStringToSQL()
         {
-            JsonConvert obj = new JsonConvert();
-            obj.DatabaseName = "JsonToSQL1";
-
+            //Json string to SQL script
+            JsonConvert converter = new JsonConvert();      
+            
             string json = File.ReadAllText("E:\\json1.txt");
 
-            string result = obj.ToSQL(json);
+            string sqlScript = converter.ToSQL(json);
 
-            
 
             Assert.AreEqual(null, null);
         }
+
+        [TestMethod]
+        public void ConvertJsonStreamToSQL()
+        {
+            //Json stream to SQL script
+            JsonConvert converter = new JsonConvert();
+
+            string jsonFilePath = "E:\\json1.txt";
+
+            using (FileStream fs = File.OpenRead(jsonFilePath))
+            {                
+                MemoryStream ms = new MemoryStream();
+                ms.SetLength(fs.Length);                
+                fs.Read(ms.GetBuffer(), 0, (int)fs.Length);
+
+                string sqlScript = converter.ToSQL(ms);
+            }
+
+
+            Assert.AreEqual(null, null);
+        }
+
     }
 }
